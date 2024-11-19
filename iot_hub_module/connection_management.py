@@ -70,7 +70,7 @@ class ConnectionManager:
         output_message_data = None
 
         # Write commands to a temporary file
-        script_suffix = ".ps1" if "powershell" in interpreter.lower() else ".sh"
+        script_suffix = ".ps1" if "powershell" in interpreter.lower() or "pwsh" in interpreter.lower() else ".sh"
         tmp_dir = None
         if os_type == "windows":
             config_dir = site_config_dir()
@@ -81,7 +81,7 @@ class ConnectionManager:
             tmp_dir = scripts_dir
         with tempfile.NamedTemporaryFile(delete=False, suffix=script_suffix,
                                          mode="w", dir=tmp_dir) as temp_file:
-            if "powershell" in interpreter.lower():
+            if "powershell" in interpreter.lower() or "pwsh" in interpreter.lower():
                 # If PowerShell is used, decode the commands
                 decoded_commands = base64.b64decode(commands).decode('utf-16-le')
                 # Ensure TLS 1.2 configuration is set at the beginning of the command
