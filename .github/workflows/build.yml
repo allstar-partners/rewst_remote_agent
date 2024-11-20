@@ -112,11 +112,11 @@ jobs:
 #          ./dist/rewst_service_manager
 #          ./dist/rewst_agent_config
 
-    - name: Sign with SSL.com CodeSignTool
-      if: matrix.os == 'windows-latest'
-      shell: pwsh
-      run: |
-        .\.github\workflows\ssl_com_sign_binaries.ps1 -username '${{ secrets.SSL_COM_USERNAME }}' -password '${{ secrets.SSL_COM_PASSWORD }}' -credentialId '${{ secrets.SSL_COM_CREDENTIAL_ID }}' -totpSecret '${{ secrets.SSL_COM_OTP }}'
+#    - name: Sign with SSL.com CodeSignTool
+#      if: matrix.os == 'windows-latest'
+#      shell: pwsh
+#      run: |
+#        .\.github\workflows\ssl_com_sign_binaries.ps1 -username '${{ secrets.SSL_COM_USERNAME }}' -password '${{ secrets.SSL_COM_PASSWORD }}' -credentialId '${{ secrets.SSL_COM_CREDENTIAL_ID }}' -totpSecret '${{ secrets.SSL_COM_OTP }}'
 
 
     - name: Generate Checksums (Windows)
@@ -127,20 +127,20 @@ jobs:
         Get-FileHash -Path ./dist/signed/rewst_agent_config.exe -Algorithm SHA256 | Format-List | Out-File -FilePath ./dist/signed/rewst_agent_config.exe.sha256
         Get-FileHash -Path ./dist/signed/rewst_service_manager.exe -Algorithm SHA256 | Format-List | Out-File -FilePath ./dist/signed/rewst_service_manager.exe.sha256
 
-    - name: Upload Signed Executable (Windows)
-      if: matrix.os == 'windows-latest'
-      uses: actions/upload-artifact@v2
-      with:
-        name: windows-latest-signed-asset
-        path: |
-          ./dist/signed/rewst_windows_service.exe
-          ./dist/signed/rewst_service_manager.exe
-          ./dist/signed/rewst_remote_agent.exe
-          ./dist/signed/rewst_agent_config.exe
-          ./dist/signed/rewst_windows_service.exe.sha256
-          ./dist/signed/rewst_service_manager.exe.sha256
-          ./dist/signed/rewst_remote_agent.exe.sha256
-          ./dist/signed/rewst_agent_config.exe.sha256
+#    - name: Upload Signed Executable (Windows)
+#     if: matrix.os == 'windows-latest'
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: windows-latest-signed-asset
+#        path: |
+#          ./dist/signed/rewst_windows_service.exe
+#          ./dist/signed/rewst_service_manager.exe
+#          ./dist/signed/rewst_remote_agent.exe
+#          ./dist/signed/rewst_agent_config.exe
+#          ./dist/signed/rewst_windows_service.exe.sha256
+#          ./dist/signed/rewst_service_manager.exe.sha256
+#          ./dist/signed/rewst_remote_agent.exe.sha256
+#          ./dist/signed/rewst_agent_config.exe.sha256
 
   release:
     needs: [ bump_version, build ]
