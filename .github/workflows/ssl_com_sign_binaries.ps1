@@ -6,7 +6,7 @@ param(
 )
 
 $downloadUrl = 'https://www.ssl.com/download/codesigntool-for-windows/'
-$appDistPath =  'D:\a\rewst_remote_agent\rewst_remote_agent\dist'
+$appDistPath =  'd:\a\rewst_remote_agent\rewst_remote_agent\dist'
 
 $inputFiles = @(
     "rewst_agent_config.exe",
