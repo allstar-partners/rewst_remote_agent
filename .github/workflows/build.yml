@@ -112,11 +112,11 @@ jobs:
 #          ./dist/rewst_service_manager
 #          ./dist/rewst_agent_config
 
-#    - name: Sign with SSL.com CodeSignTool
-#      if: matrix.os == 'windows-latest'
-#      shell: pwsh
-#      run: |
-#        .\.github\workflows\ssl_com_sign_binaries.ps1 -username '${{ secrets.SSL_COM_USERNAME }}' -password '${{ secrets.SSL_COM_PASSWORD }}' -credentialId '${{ secrets.SSL_COM_CREDENTIAL_ID }}' -totpSecret '${{ secrets.SSL_COM_OTP }}'
+    - name: Sign with SSL.com CodeSignTool
+      if: matrix.os == 'windows-latest'
+      shell: pwsh
+      run: |
+        .\.github\workflows\ssl_com_sign_binaries.ps1 -username '${{ secrets.SSL_COM_USERNAME }}' -password '${{ secrets.SSL_COM_PASSWORD }}' -credentialId '${{ secrets.SSL_COM_CREDENTIAL_ID }}' -totpSecret '${{ secrets.SSL_COM_OTP }}'
 
 
     - name: Generate Checksums (Windows)

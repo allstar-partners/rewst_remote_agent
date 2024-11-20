@@ -6,7 +6,7 @@ param(
 )
 
 $downloadUrl = 'https://www.ssl.com/download/codesigntool-for-windows/'
-$appDistPath =  'D:\a\rewst_remote_agent\rewst_remote_agent\dist'
+$appDistPath =  'C:\GITHUB\rewst_remote_agent\releases\dist'
 
 $inputFiles = @(
     "rewst_agent_config.exe",
@@ -54,13 +54,13 @@ foreach ($inputFile in $inputFiles) {
     )
 
     ## Uncomment this to sign for reals
-    Start-Process -FilePath ".\CodeSignTool.bat" -ArgumentList $signArguments -Wait -NoNewWindow
-    Write-Host "Signed to $outputDirPath\$inputFile"
+    #Start-Process -FilePath ".\CodeSignTool.bat" -ArgumentList $signArguments -Wait -NoNewWindow
+    #Write-Host "Signed to $outputDirPath\$inputFile"
 
 
     ## UnComment these to do fake sign
-    # Write-Host "Faking it: Signed to $outputDirPath\$inputFile"
-    # Copy-Item $appDistPath\$inputFile $outputDirPath
+    Write-Host "Faking it: Signed to $outputDirPath\$inputFile"
+    Copy-Item $appDistPath\$inputFile $outputDirPath
 
     
 }
